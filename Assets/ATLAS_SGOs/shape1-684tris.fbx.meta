@@ -1,0 +1,168 @@
+fileFormatVersion: 2
+guid: 5a71279966e8da74d86ddb6c095963b6
+timeCreated: 1473464383
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: pSolid2_shape684tris
+    100002: //RootNode
+    100004: shape684tris_pSolid10
+    100006: shape684tris_pSolid11
+    100008: shape684tris_pSolid12
+    100010: shape684tris_pSolid13
+    100012: shape684tris_pSolid14
+    100014: shape684tris_pSolid15
+    100016: shape684tris_pSolid16
+    100018: shape684tris_pSolid17
+    100020: shape684tris_pSolid18
+    100022: shape684tris_pSolid19
+    100024: shape684tris_pSolid20
+    100026: shape684tris_pSolid3
+    100028: shape684tris_pSolid4
+    100030: shape684tris_pSolid5
+    100032: shape684tris_pSolid6
+    100034: shape684tris_pSolid7
+    100036: shape684tris_pSolid8
+    100038: shape684tris_pSolid9
+    400000: pSolid2_shape684tris
+    400002: //RootNode
+    400004: shape684tris_pSolid10
+    400006: shape684tris_pSolid11
+    400008: shape684tris_pSolid12
+    400010: shape684tris_pSolid13
+    400012: shape684tris_pSolid14
+    400014: shape684tris_pSolid15
+    400016: shape684tris_pSolid16
+    400018: shape684tris_pSolid17
+    400020: shape684tris_pSolid18
+    400022: shape684tris_pSolid19
+    400024: shape684tris_pSolid20
+    400026: shape684tris_pSolid3
+    400028: shape684tris_pSolid4
+    400030: shape684tris_pSolid5
+    400032: shape684tris_pSolid6
+    400034: shape684tris_pSolid7
+    400036: shape684tris_pSolid8
+    400038: shape684tris_pSolid9
+    2300000: pSolid2_shape684tris
+    2300002: shape684tris_pSolid10
+    2300004: shape684tris_pSolid11
+    2300006: shape684tris_pSolid12
+    2300008: shape684tris_pSolid13
+    2300010: shape684tris_pSolid14
+    2300012: shape684tris_pSolid15
+    2300014: shape684tris_pSolid16
+    2300016: shape684tris_pSolid17
+    2300018: shape684tris_pSolid18
+    2300020: shape684tris_pSolid19
+    2300022: shape684tris_pSolid20
+    2300024: shape684tris_pSolid3
+    2300026: shape684tris_pSolid4
+    2300028: shape684tris_pSolid5
+    2300030: shape684tris_pSolid6
+    2300032: shape684tris_pSolid7
+    2300034: shape684tris_pSolid8
+    2300036: shape684tris_pSolid9
+    3300000: pSolid2_shape684tris
+    3300002: shape684tris_pSolid10
+    3300004: shape684tris_pSolid11
+    3300006: shape684tris_pSolid12
+    3300008: shape684tris_pSolid13
+    3300010: shape684tris_pSolid14
+    3300012: shape684tris_pSolid15
+    3300014: shape684tris_pSolid16
+    3300016: shape684tris_pSolid17
+    3300018: shape684tris_pSolid18
+    3300020: shape684tris_pSolid19
+    3300022: shape684tris_pSolid20
+    3300024: shape684tris_pSolid3
+    3300026: shape684tris_pSolid4
+    3300028: shape684tris_pSolid5
+    3300030: shape684tris_pSolid6
+    3300032: shape684tris_pSolid7
+    3300034: shape684tris_pSolid8
+    3300036: shape684tris_pSolid9
+    4300000: pSolid2_shape684tris
+    4300002: shape684tris_pSolid10
+    4300004: shape684tris_pSolid11
+    4300006: shape684tris_pSolid12
+    4300008: shape684tris_pSolid13
+    4300010: shape684tris_pSolid14
+    4300012: shape684tris_pSolid15
+    4300014: shape684tris_pSolid16
+    4300016: shape684tris_pSolid17
+    4300018: shape684tris_pSolid18
+    4300020: shape684tris_pSolid19
+    4300022: shape684tris_pSolid20
+    4300024: shape684tris_pSolid3
+    4300026: shape684tris_pSolid4
+    4300028: shape684tris_pSolid5
+    4300030: shape684tris_pSolid6
+    4300032: shape684tris_pSolid7
+    4300034: shape684tris_pSolid8
+    4300036: shape684tris_pSolid9
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
