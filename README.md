@@ -1,4 +1,4 @@
-# HealthcareAnalytics
+# Qlik Healthcare Analytics
 Provides medical personnel access to analytical information in the field through Augmented Reality
 
 This Unity application will display a 3D Sankey visualization from Qlik Sense. It has been designed and built for the Microsoft HoloLens. 
@@ -21,4 +21,4 @@ A brief verbal summary of the 3D visualization is provided by Yseop through Natu
 - Must have Visual Studio installed
 
 ## To Run
-Build a standalone app for HoloLens using Visual Studio.
+Build a standalone app for HoloLens using Visual Studio. [Instructions](https://developer.microsoft.com/en-us/windows/holographic/exporting_and_building_a_unity_visual_studio_solution)
