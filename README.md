@@ -7,6 +7,8 @@ Above her is a visualization of the many different procedures a doctor may perfo
 To the left of the viz, there is a filter panel where users can select the specific demographics and symptoms for the patient.
 As selections are made, the 3D visualization is updated.
 
+[![Video documentation of Healthcare Analytics](https://img.youtube.com/vi/1g1G2TjnJdw/0.jpg)](https://www.youtube.com/watch?v=1g1G2TjnJdw)
+
 ## Natural Language
 Users can make selections either through the standard HoloLens "Air Tap" or through verbal commands such as *Male, Female, Smoker No, Overweight, clear, etc.*
 
