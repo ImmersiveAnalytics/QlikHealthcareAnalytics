@@ -15,7 +15,7 @@ Users can make selections either through the standard HoloLens "Air Tap" or thro
 A brief verbal summary of the 3D visualization is provided by Yseop through Natural Language Generation and text-to-speech.
 
 ## Requirements
-- *Used in conjunction with  [Qlik Healthcare Node Server](https://github.com/ImmersiveAnalytics/QlikHealthcareNodeServer)*
+- *Used in conjunction with  [Qlik Healthcare Node.js Server](https://github.com/ImmersiveAnalytics/QlikHealthcareNodeServer)*
 - Must have Qlik Sense Server application running with Node.js app
 - Must have Unity HoloLens 5.4.0b24-HTP installed
 - Must have Visual Studio installed
