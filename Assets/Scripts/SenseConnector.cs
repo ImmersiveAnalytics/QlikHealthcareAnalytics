@@ -143,15 +143,19 @@ public class SenseConnector : MonoBehaviour {
 
         // Add custom headers to the request.
         Dictionary<string, string> headers = new Dictionary<string, string>();
+//        headers["Authorization"] = "Basic " + System.Convert.ToBase64String(
+//            System.Text.Encoding.ASCII.GetBytes("eyJraWQiOiJzdGFnaW5nXzAiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJTYXZ2eSIsImF1ZCI6InN0YWdpbmciLCJleHAiOjE1MDMxNDcxMzEsImp0aSI6IjRQVXYtbHl1OTdvaTlkMGUxNTFOOUEiLCJpYXQiOjE0NzE2MTExMzEsInN1YiI6Ik1hcmsgQmx1bmRyZWQiLCJ0b29scyI6WyJxbGlrc2Vuc2UiXSwiZW1haWwiOiJtYmx1bmRyZWRAeXNlb3AuY29tIn0.2zFzGT5rYDTwprW7WPV5nJtYnPyfMfRNPNx05bh5MQE23Ju0mdiTcpls7UR845-8y1eOb0WcjRwBsONEn1kWbg:"));
         headers["Authorization"] = "Basic " + System.Convert.ToBase64String(
-            System.Text.Encoding.ASCII.GetBytes("eyJraWQiOiJzdGFnaW5nXzAiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJTYXZ2eSIsImF1ZCI6InN0YWdpbmciLCJleHAiOjE1MDMxNDcxMzEsImp0aSI6IjRQVXYtbHl1OTdvaTlkMGUxNTFOOUEiLCJpYXQiOjE0NzE2MTExMzEsInN1YiI6Ik1hcmsgQmx1bmRyZWQiLCJ0b29scyI6WyJxbGlrc2Vuc2UiXSwiZW1haWwiOiJtYmx1bmRyZWRAeXNlb3AuY29tIn0.2zFzGT5rYDTwprW7WPV5nJtYnPyfMfRNPNx05bh5MQE23Ju0mdiTcpls7UR845-8y1eOb0WcjRwBsONEn1kWbg:"));
+            System.Text.Encoding.ASCII.GetBytes("eyJraWQiOiJwcm9kXzAiLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJTYXZ2eSIsImF1ZCI6InByb2QiLCJleHAiOjE1MTg2NjEzNDcsImp0aSI6ImVBTkdrY29WX2tFSlF3bE1NemhONFEiLCJpYXQiOjE0ODcxMjUzNDcsInN1YiI6Ik1hcmdvbGlzIFRvZGQiLCJ0b29scyI6WyJxbGlrc2Vuc2UiXSwiZW1haWwiOiJ0b2RkLm1hcmdvbGlzQHFsaWsuY29tIn0.XcjNksZuAYhmdDlzzoDTBM6zWO6EXfnNFzdUnEDgU1hEIKFtEnUZCSbjWJgdhBzMZjZwIcboJYRvJwR6Mb5vdw:"));
         headers["Content-Type"] = "application/json;charset=UTF-8";
         headers["Accept"] = "text/html";
         headers["Content-Length"] = senseData.Length.ToString();
         Debug.Log("Yseop Request header: " + headers["Authorization"]);
 
         // Post a request to an URL with our custom headers
-        string url = "https://savvy-qlik-staging.yseop-cloud.com/yseop-manager/direct/savvy-kb-fr/dialog.do";
+        //string url = "https://savvy-qlik-staging.yseop-cloud.com/yseop-manager/direct/savvy-kb-fr/dialog.do";
+        string url = "https://savvy-api.yseop-cloud.com/sandbox/api/v1/describe-chart";
+    
         var encoding = new System.Text.UTF8Encoding();
         WWW www = new WWW(url, encoding.GetBytes(senseData), headers);
         StartCoroutine(TextRequest(www));
@@ -168,7 +172,7 @@ public class SenseConnector : MonoBehaviour {
             string s = www.text;
             Debug.Log("Yseop response: " + s);
 
-            int start = s.IndexOf("Your flow");
+            int start = s.IndexOf("text-result") + 13;
             int end = s.IndexOf("<p>");
             string text = s.Substring(start, end-start);
             text = text.Replace("\n", string.Empty);
