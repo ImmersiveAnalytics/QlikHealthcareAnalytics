@@ -635,7 +635,7 @@ public class SplineFormer : MonoBehaviour
         UnityEditor.MeshUtility.SetMeshCompression(result, UnityEditor.ModelImporterMeshCompression.High);
         result.name = ExportOptions.GetName(this, group);
 #endif
-        result.Optimize();
+        ;
         result.hideFlags = HideFlags.DontSave;
 
         group.ResultMesh = result;
@@ -932,7 +932,7 @@ public class SplineFormer : MonoBehaviour
                 mesh.triangles = triangles;
 
                 mesh.RecalculateBounds();
-                mesh.Optimize();
+                ;
             }
 
             return _dummyBox;

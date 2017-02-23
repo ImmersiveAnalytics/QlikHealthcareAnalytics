@@ -266,7 +266,7 @@ public class Tube : MonoBehaviour {
         mesh.triangles = triangles;
 
         mesh.RecalculateBounds();
-        mesh.Optimize();
+        ;
     }
 
 }

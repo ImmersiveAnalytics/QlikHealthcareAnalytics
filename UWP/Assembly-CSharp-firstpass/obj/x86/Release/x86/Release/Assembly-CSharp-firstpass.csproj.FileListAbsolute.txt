@@ -18,7 +18,6 @@ C:\Users\TMG\Documents\Healthcare Analytics\Healthcare Analytics\UWP\Assembly-CS
 C:\Users\TMG\Documents\Healthcare Analytics\Healthcare AnalyticsAR\UWP\Assembly-CSharp-firstpass\bin\x86\Release\Assembly-CSharp-firstpass.dll
 C:\Users\TMG\Documents\Healthcare Analytics\Healthcare AnalyticsAR\UWP\Assembly-CSharp-firstpass\bin\x86\Release\Assembly-CSharp-firstpass.pdb
 C:\Users\TMG\Documents\Healthcare Analytics\Healthcare AnalyticsAR\UWP\Assembly-CSharp-firstpass\bin\x86\Release\Assembly-CSharp-firstpass.pri
-C:\Users\TMG\Documents\Healthcare Analytics\Healthcare AnalyticsAR\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache
 C:\Users\TMG\Documents\Healthcare Analytics\Healthcare AnalyticsAR\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\Assembly-CSharp-firstpass.dll
 C:\Users\TMG\Documents\Healthcare Analytics\Healthcare AnalyticsAR\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\Assembly-CSharp-firstpass.pdb
 C:\Users\TMG\Documents\Healthcare Analytics\Healthcare AnalyticsAR\UWP\Assembly-CSharp-firstpass\obj\x86\Release\x86\Release\priconfig.xml
