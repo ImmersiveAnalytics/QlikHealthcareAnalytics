@@ -126,8 +126,20 @@ public class SenseConnector : MonoBehaviour {
         int c = 1;
         foreach (string p in _paths)
         {
-            Debug.Log("_path: " + p);
-            senseData += @"{ ""dimensions"":[ { ""index"":0, ""position"":" + c.ToString() + @", ""label"":""" + p + @"""} ],";
+            //Debug.Log("_path: " + p);
+            string[] sVals = p.Split(',');
+            List<string> vals = new List<string>();
+            foreach(string s in sVals)
+            {
+                vals.Add(s);
+            }
+            // Fix for paths with only a single node
+            if (vals.Count == 1)
+            {
+                vals.Add(" " + vals[0]);
+            }
+            string newPath = string.Join(",", vals.ToArray());
+            senseData += @"{ ""dimensions"":[ { ""index"":0, ""position"":" + c.ToString() + @", ""label"":""" + newPath + @"""} ],";
             senseData += @"""measures"":[ { ""index"":0, ""value"":""1"" } ] }";
             if (c < _paths.Count)
                 senseData += ",";
