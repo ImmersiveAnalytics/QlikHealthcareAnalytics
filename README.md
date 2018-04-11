@@ -17,7 +17,8 @@ A brief verbal summary of the 3D visualization is provided by Yseop through Natu
 ## Requirements
 - *Used in conjunction with  [Qlik Healthcare Node.js Server](https://github.com/ImmersiveAnalytics/QlikHealthcareNodeServer)*
 - Must have Qlik Sense Server application running with Node.js app
-- Must have Unity HoloLens 5.4.0b24-HTP installed
+- Must have Unity 5.5.0f3
+- Uses Vuforia 6.2.10
 - Must have Visual Studio installed
 
 ## To Run
