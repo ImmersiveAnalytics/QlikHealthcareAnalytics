@@ -16,7 +16,7 @@ public class Sankey : MonoBehaviour
 
     private List<GameObject> pathGOs = new List<GameObject>();
     private static float chartHeight = 1.0f;
-    private static float chartLength = 1.0f;
+    private static float chartLength = 2.0f;
 
     // Use this for initialization
     void Start()
@@ -56,6 +56,7 @@ public class Sankey : MonoBehaviour
             //Debug.Log("path: " + p);
             string path = p.Substring(1, p.Length - 2);
             string[] nodes = path.Split(',');
+            Debug.Log("SANKEY nodes.Length: " + nodes.Length);
             if (nodes.Length < 2)
                 continue;
 
@@ -75,7 +76,11 @@ public class Sankey : MonoBehaviour
                     Paths.Add(j, new Dictionary<string, int>());
                     Paths[j][n] = 1;
                 }
-                MaxSteps = MaxSteps > Paths[j][n] ? MaxSteps : Paths[j][n];
+                //Original
+                //MaxSteps = MaxSteps > Paths[j][n] ? MaxSteps : Paths[j][n];
+
+                MaxSteps = MaxSteps > nodes.Length ? MaxSteps : nodes.Length;
+                Debug.Log("SANKEY MaxSteps: " + MaxSteps);
             }
         }
 
@@ -360,14 +365,14 @@ public class Sankey : MonoBehaviour
         Debug.Log("data: " + d);
         JSONNode JPaths = JSON.Parse(d);
 
-        if (JPaths["smokers"]["Y"].ToString() == "\"X\"")
-            Canvas.transform.Find("Toggle-Smoker-Y").GetComponent<Toggle>().interactable = false;
+        if (JPaths["Responsive"]["Y"].ToString() == "\"X\"")
+            Canvas.transform.Find("Toggle-Responsive-Y").GetComponent<Toggle>().interactable = false;
         else
-            Canvas.transform.Find("Toggle-Smoker-Y").GetComponent<Toggle>().interactable = true;
-        if (JPaths["smokers"]["N"].ToString() == "\"X\"")
-            Canvas.transform.Find("Toggle-Smoker-N").GetComponent<Toggle>().interactable = false;
+            Canvas.transform.Find("Toggle-Responsive-Y").GetComponent<Toggle>().interactable = true;
+        if (JPaths["Responsive"]["N"].ToString() == "\"X\"")
+            Canvas.transform.Find("Toggle-Responsive-N").GetComponent<Toggle>().interactable = false;
         else
-            Canvas.transform.Find("Toggle-Smoker-N").GetComponent<Toggle>().interactable = true;
+            Canvas.transform.Find("Toggle-Responsive-N").GetComponent<Toggle>().interactable = true;
         if (JPaths["BMI"]["Y"].ToString() == "\"X\"")
             Canvas.transform.Find("Toggle-BMI-Y").GetComponent<Toggle>().interactable = false;
         else
@@ -376,14 +381,14 @@ public class Sankey : MonoBehaviour
             Canvas.transform.Find("Toggle-BMI-N").GetComponent<Toggle>().interactable = false;
         else
             Canvas.transform.Find("Toggle-BMI-N").GetComponent<Toggle>().interactable = true;
-        if (JPaths["diabetes"]["Y"].ToString() == "\"X\"")
-            Canvas.transform.Find("Toggle-Diabetes-Y").GetComponent<Toggle>().interactable = false;
+        if (JPaths["Bleeding"]["Y"].ToString() == "\"X\"")
+            Canvas.transform.Find("Toggle-Bleeding-Y").GetComponent<Toggle>().interactable = false;
         else
-            Canvas.transform.Find("Toggle-Diabetes-Y").GetComponent<Toggle>().interactable = true;
-        if (JPaths["diabetes"]["N"].ToString() == "\"X\"")
-            Canvas.transform.Find("Toggle-Diabetes-N").GetComponent<Toggle>().interactable = false;
+            Canvas.transform.Find("Toggle-Bleeding-Y").GetComponent<Toggle>().interactable = true;
+        if (JPaths["Bleeding"]["N"].ToString() == "\"X\"")
+            Canvas.transform.Find("Toggle-Bleeding-N").GetComponent<Toggle>().interactable = false;
         else
-            Canvas.transform.Find("Toggle-Diabetes-N").GetComponent<Toggle>().interactable = true;
+            Canvas.transform.Find("Toggle-Bleeding-N").GetComponent<Toggle>().interactable = true;
         if (JPaths["gender"]["Male"].ToString() == "\"X\"")
             Canvas.transform.Find("Toggle-Male").GetComponent<Toggle>().interactable = false;
         else
@@ -398,18 +403,18 @@ public class Sankey : MonoBehaviour
     // Clear Buttons with exclusion data from Sense
     public void clearUI()
     {
-        Canvas.transform.Find("Toggle-Smoker-Y").GetComponent<Toggle>().interactable = true;
-        Canvas.transform.Find("Toggle-Smoker-Y").GetComponent<Toggle>().isOn = false;
-        Canvas.transform.Find("Toggle-Smoker-N").GetComponent<Toggle>().interactable = true;
-        Canvas.transform.Find("Toggle-Smoker-N").GetComponent<Toggle>().isOn = false;
+        Canvas.transform.Find("Toggle-Responsive-Y").GetComponent<Toggle>().interactable = true;
+        Canvas.transform.Find("Toggle-Responsive-Y").GetComponent<Toggle>().isOn = false;
+        Canvas.transform.Find("Toggle-Responsive-N").GetComponent<Toggle>().interactable = true;
+        Canvas.transform.Find("Toggle-Responsive-N").GetComponent<Toggle>().isOn = false;
         Canvas.transform.Find("Toggle-BMI-Y").GetComponent<Toggle>().interactable = true;
         Canvas.transform.Find("Toggle-BMI-Y").GetComponent<Toggle>().isOn = false;
         Canvas.transform.Find("Toggle-BMI-N").GetComponent<Toggle>().interactable = true;
         Canvas.transform.Find("Toggle-BMI-N").GetComponent<Toggle>().isOn = false;
-        Canvas.transform.Find("Toggle-Diabetes-Y").GetComponent<Toggle>().interactable = true;
-        Canvas.transform.Find("Toggle-Diabetes-Y").GetComponent<Toggle>().isOn = false;
-        Canvas.transform.Find("Toggle-Diabetes-N").GetComponent<Toggle>().interactable = true;
-        Canvas.transform.Find("Toggle-Diabetes-N").GetComponent<Toggle>().isOn = false;
+        Canvas.transform.Find("Toggle-Bleeding-Y").GetComponent<Toggle>().interactable = true;
+        Canvas.transform.Find("Toggle-Bleeding-Y").GetComponent<Toggle>().isOn = false;
+        Canvas.transform.Find("Toggle-Bleeding-N").GetComponent<Toggle>().interactable = true;
+        Canvas.transform.Find("Toggle-Bleeding-N").GetComponent<Toggle>().isOn = false;
         Canvas.transform.Find("Toggle-Male").GetComponent<Toggle>().interactable = true;
         Canvas.transform.Find("Toggle-Male").GetComponent<Toggle>().isOn = false;
         Canvas.transform.Find("Toggle-Female").GetComponent<Toggle>().interactable = true;

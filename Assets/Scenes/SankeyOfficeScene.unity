@@ -635,7 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8013ec03b3f3f424b8b43ecefdac4fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SegmentMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 3}
+  SegmentMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
   _material1: {fileID: 2100000, guid: 77f4737bb8812014f9c294c63e4a478e, type: 2}
   _material2: {fileID: 2100000, guid: bc6fc7d00054d3d45becb4860da23c5b, type: 2}
   _material3: {fileID: 2100000, guid: b09a099cf62ba054db1f44ca3fafd68a, type: 2}

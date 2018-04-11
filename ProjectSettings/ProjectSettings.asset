@@ -457,7 +457,18 @@ PlayerSettings:
   metroCertificateIssuer: DefaultCompany
   metroCertificateNotAfter: 00cbf82c1917d301
   metroApplicationDescription: Healthcare Analytics
-  wsaImages: {}
+  wsaImages:
+    65686: Assets/Textures/qlik-logo-medSm.png
+    131222: Assets/Textures/qlik-logo-wideLg.png
+    720996: Assets/Textures/qlik-logo-med.png
+    786532: 
+    852068: Assets/Textures/qlik-logo-small.png
+    983140: Assets/Textures/qlik-logo-large.png
+    1572964: 
+    2162788: Assets/Textures/qlik-logo-med.png
+    2228324: Assets/Textures/qlik-logo-large.png
+    2228374: Assets/Textures/qlik-logo-Xlarge.png
+    2293860: Assets/Textures/qlik-logo-wide.png
   metroTileShortName: Healthcare Analytics
   metroCommandLineArgsFile: 
   metroTileShowName: 0
@@ -479,6 +490,7 @@ PlayerSettings:
       CodeGeneration: False
       EnterpriseAuthentication: False
       HumanInterfaceDevice: False
+      InputInjectionBrokered: False
       InternetClient: True
       InternetClientServer: False
       Location: False

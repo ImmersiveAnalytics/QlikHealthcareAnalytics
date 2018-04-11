@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Windows.Speech;
 
-namespace HoloToolkit.Unity
+namespace HoloToolkit.Unity.InputModule
 {
     /// <summary>
     /// KeywordManager allows you to specify keywords and methods in the Unity
@@ -44,23 +44,36 @@ namespace HoloToolkit.Unity
         public KeywordAndResponse[] KeywordsAndResponses;
 
         private KeywordRecognizer keywordRecognizer;
-        private Dictionary<string, UnityEvent> responses;
+        private readonly Dictionary<string, UnityEvent> responses = new Dictionary<string, UnityEvent>();
 
         void Start()
         {
-            if (KeywordsAndResponses.Length > 0)
+            int keywordCount = KeywordsAndResponses.Length;
+            if (keywordCount > 0)
             {
-                // Convert the struct array into a dictionary, with the keywords and the keys and the methods as the values.
-                // This helps easily link the keyword recognized to the UnityEvent to be invoked.
-                responses = KeywordsAndResponses.ToDictionary(keywordAndResponse => keywordAndResponse.Keyword,
-                                                              keywordAndResponse => keywordAndResponse.Response);
-
-                keywordRecognizer = new KeywordRecognizer(responses.Keys.ToArray());
-                keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
-
-                if (RecognizerStart == RecognizerStartBehavior.AutoStart)
+                try
                 {
-                    keywordRecognizer.Start();
+                    string[] keywords = new string[keywordCount];
+                    // Convert the struct array into a dictionary, with the keywords and the keys and the methods as the values.
+                    // This helps easily link the keyword recognized to the UnityEvent to be invoked.
+                    for (int index = 0; index < keywordCount; index++)
+                    {
+                        KeywordAndResponse keywordAndResponse = KeywordsAndResponses[index];
+                        responses[keywordAndResponse.Keyword] = keywordAndResponse.Response;
+                        keywords[index] = keywordAndResponse.Keyword;
+                    }
+
+                    keywordRecognizer = new KeywordRecognizer(keywords);
+                    keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
+
+                    if (RecognizerStart == RecognizerStartBehavior.AutoStart)
+                    {
+                        keywordRecognizer.Start();
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    Debug.LogError("Duplicate keywords specified in the Inspector on " + gameObject.name + ".");
                 }
             }
             else
@@ -71,7 +84,10 @@ namespace HoloToolkit.Unity
 
         void Update()
         {
-            ProcessKeyBindings();
+            if (keywordRecognizer != null && keywordRecognizer.IsRunning)
+            {
+                ProcessKeyBindings();
+            }
         }
 
         void OnDestroy()
@@ -81,6 +97,22 @@ namespace HoloToolkit.Unity
                 StopKeywordRecognizer();
                 keywordRecognizer.OnPhraseRecognized -= KeywordRecognizer_OnPhraseRecognized;
                 keywordRecognizer.Dispose();
+            }
+        }
+
+        void OnDisable()
+        {
+            if (keywordRecognizer != null)
+            {
+                StopKeywordRecognizer();
+            }
+        }
+
+        void OnEnable()
+        {
+            if (keywordRecognizer != null && RecognizerStart == RecognizerStartBehavior.AutoStart)
+            {
+                StartKeywordRecognizer();
             }
         }
 

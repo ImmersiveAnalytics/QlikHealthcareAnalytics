@@ -5,12 +5,19 @@ using UnityEngine.UI;
 using SimpleJSON;
 using HoloToolkit.Unity;
 using System.Collections.Generic;
+using ChartAndGraph;
 
 public class SenseConnector : MonoBehaviour {
 
 
     //public GameObject patient;
     public Sankey mySankey;
+    public GameObject myBarchart;
+    public GameObject cursorForHover;
+    public GameObject myPiechart;
+    public GameObject myLinechart;
+    public Material myChartMaterial;
+    public Material[] myPieMaterials;
     public GameObject Canvas;
     public TextToSpeechManager textToSpeechManager;
 
@@ -57,6 +64,9 @@ public class SenseConnector : MonoBehaviour {
             string s = www.text;
 //            string s = www.downloadHandler.text;
             mySankey.NewData(s);
+            getBarchart();
+            getPiechart();
+            getLinechart();
             getFields();
             getText(s);
         }
@@ -65,6 +75,173 @@ public class SenseConnector : MonoBehaviour {
             Debug.Log("WWW Error: " + www.error);
         }
     }
+
+    public void getBarchart()
+    {
+        Debug.Log("getting barchart");
+
+        AddBarData myBarScript = myBarchart.GetComponent<AddBarData>();
+        myBarScript.Clear();
+
+        string url = "http://pe.qlik.com:8082/listBars";
+        WWWForm form = new WWWForm();
+        form.AddField("field", "val");
+        WWW www = new WWW(url, form);
+        StartCoroutine(BarchartRequest(www));
+    }
+
+    IEnumerator BarchartRequest(WWW www)
+    {
+        yield return www;
+
+        // check for errors
+        if (www.error == null)
+        {
+            string s = www.text;
+
+            AddBarData myBarScript = myBarchart.GetComponent<AddBarData>();
+            //myBarScript.Clear();
+            
+
+            JSONNode JBars = JSON.Parse(s);
+            for (int i = 0; i < JBars.AsArray.Count; i++)
+            {
+                string b = JBars[i].ToString();
+                string bar = b.Substring(1, b.Length - 2);
+                string[] kvp = bar.Split(':');
+                string key = kvp[0].Substring(1, kvp[0].Length - 2);
+                string val = kvp[1].Substring(1, kvp[1].Length - 2);
+
+                myBarScript.AddCategory(key, myChartMaterial);
+                myBarScript.SetValue(key, float.Parse(val));
+                Debug.Log("bar: " + key + ":" + val);
+            }
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
+    }
+
+    public void barClicked(BarChart.BarEventArgs args)
+    {
+        selectBar("Admission Type", args.Category);
+    }
+
+    public void barHovered(BarChart.BarEventArgs args)
+    {
+        cursorForHover.SetActive(true);
+        Text hoverText = cursorForHover.GetComponentInChildren<Text>();
+        hoverText.text = args.Category;
+        Debug.Log("bar hovered " + args.Category);
+    }
+
+    public void barHoverExit()
+    {
+        cursorForHover.SetActive(false);
+    }
+
+    public void getPiechart()
+    {
+        Debug.Log("getting piechart");
+
+        string url = "http://pe.qlik.com:8082/listPies";
+        WWWForm form = new WWWForm();
+        form.AddField("field", "val");
+        WWW www = new WWW(url, form);
+        StartCoroutine(PiechartRequest(www));
+    }
+
+    IEnumerator PiechartRequest(WWW www)
+    {
+        yield return www;
+
+        // check for errors
+        if (www.error == null)
+        {
+            string s = www.text;
+
+            AddPieData myPieScript = myPiechart.GetComponent<AddPieData>();
+            myPieScript.Clear();
+
+
+            JSONNode JPies = JSON.Parse(s);
+            for (int i = 0; i < JPies.AsArray.Count; i++)
+            {
+                string p = JPies[i].ToString();
+                string pie = p.Substring(1, p.Length - 2);
+                string[] kvp = pie.Split(':');
+                string key = kvp[0].Substring(1, kvp[0].Length - 2);
+                string val = kvp[1].Substring(1, kvp[1].Length - 2);
+
+                myPieScript.AddCategory(key, myPieMaterials[i]);
+                myPieScript.SetValue(key, float.Parse(val));
+                Debug.Log("pie: " + key + ":" + val);
+            }
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
+    }
+
+    public void pieClicked(PieChart.PieEventArgs args)
+    {
+//        selectPie("AbWVpk", args.Category);
+        selectPie("Age Group", args.Category);
+    }
+
+    public void getLinechart()
+    {
+        Debug.Log("getting linechart");
+
+        AddLineData myLineScript = myLinechart.GetComponent<AddLineData>();
+        myLineScript.Clear();
+
+        string url = "http://pe.qlik.com:8082/listLines";
+        WWWForm form = new WWWForm();
+        form.AddField("field", "val");
+        WWW www = new WWW(url, form);
+        StartCoroutine(LinechartRequest(www));
+    }
+
+    IEnumerator LinechartRequest(WWW www)
+    {
+        yield return www;
+
+        // check for errors
+        if (www.error == null)
+        {
+            string s = www.text;
+
+            AddLineData myLineScript = myLinechart.GetComponent<AddLineData>();
+            //myLineScript.Clear();
+
+            JSONNode JLines = JSON.Parse(s);
+            for (int i = 0; i < JLines.AsArray.Count; i++)
+            {
+                string l = JLines[i].ToString();
+                string line = l.Substring(1, l.Length - 2);
+                string[] kvp = line.Split(':');
+                string key = kvp[0].Substring(1, kvp[0].Length - 2);
+                string val = kvp[1].Substring(1, kvp[1].Length - 2);
+
+                //myLineScript.AddCategory(key, myPieMaterials[i]);
+                //myLineScript.SetValue(float.Parse(key), float.Parse(val));
+                myLineScript.SetValue(key, float.Parse(val));
+                Debug.Log("line: " + key + ":" + val);
+            }
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
+    }
+
+//    public void lineClicked(GraphChart.LineEventArgs args)
+//    {
+//        selectPie("Customer Age", args.Category);
+//    }
 
     public void getText(string data)
     {
@@ -241,64 +418,64 @@ public class SenseConnector : MonoBehaviour {
 
         StartCoroutine(ClearSelections(www));
     }
-    public void selectSmokersVoice()
+    public void selectResponsiveVoice()
     {
-        if (Canvas.transform.Find("Toggle-Smoker-Y").GetComponent<Toggle>().interactable)
+        if (Canvas.transform.Find("Toggle-Responsive-Y").GetComponent<Toggle>().interactable)
         {
-            Canvas.transform.Find("Toggle-Smoker-Y").GetComponent<Toggle>().isOn = true;
+            Canvas.transform.Find("Toggle-Responsive-Y").GetComponent<Toggle>().isOn = true;
         }
     }
-    public void selectSmokersNoVoice()
+    public void selectResponsiveNoVoice()
     {
-        if (Canvas.transform.Find("Toggle-Smoker-N").GetComponent<Toggle>().interactable)
+        if (Canvas.transform.Find("Toggle-Responsive-N").GetComponent<Toggle>().interactable)
         {
-            Canvas.transform.Find("Toggle-Smoker-N").GetComponent<Toggle>().isOn = true;
+            Canvas.transform.Find("Toggle-Responsive-N").GetComponent<Toggle>().isOn = true;
         }
     }
-    public void selectSmokersY()
+    public void selectResponsiveY()
     {
-        if (Canvas.transform.Find("Toggle-Smoker-Y").GetComponent<Toggle>().isOn)
+        if (Canvas.transform.Find("Toggle-Responsive-Y").GetComponent<Toggle>().isOn)
         {
-            Debug.Log("selecting smokers - Y");
-            StartCoroutine(FilterSelect("Smoker", "Y"));
+            Debug.Log("selecting Responsive - Y");
+            StartCoroutine(FilterSelect("Responsive", "Y"));
         }
     }
-    public void selectSmokersN()
+    public void selectResponsiveN()
     {
-        if (Canvas.transform.Find("Toggle-Smoker-N").GetComponent<Toggle>().isOn)
+        if (Canvas.transform.Find("Toggle-Responsive-N").GetComponent<Toggle>().isOn)
         {
-            Debug.Log("selecting smokers - N");
-            StartCoroutine(FilterSelect("Smoker", "N"));
+            Debug.Log("selecting Responsive - N");
+            StartCoroutine(FilterSelect("Responsive", "N"));
         }
     }
-    public void selectDiabetesVoice()
+    public void selectBleedingVoice()
     {
-        if (Canvas.transform.Find("Toggle-Diabetes-Y").GetComponent<Toggle>().interactable)
+        if (Canvas.transform.Find("Toggle-Bleeding-Y").GetComponent<Toggle>().interactable)
         {
-            Canvas.transform.Find("Toggle-Diabetes-Y").GetComponent<Toggle>().isOn = true;
+            Canvas.transform.Find("Toggle-Bleeding-Y").GetComponent<Toggle>().isOn = true;
         }
     }
-    public void selectDiabetesNpVoice()
+    public void selectBleedingNpVoice()
     {
-        if (Canvas.transform.Find("Toggle-Diabetes-N").GetComponent<Toggle>().interactable)
+        if (Canvas.transform.Find("Toggle-Bleeding-N").GetComponent<Toggle>().interactable)
         {
-            Canvas.transform.Find("Toggle-Diabetes-N").GetComponent<Toggle>().isOn = true;
+            Canvas.transform.Find("Toggle-Bleeding-N").GetComponent<Toggle>().isOn = true;
         }
     }
-    public void selectDiabetesY()
+    public void selectBleedingY()
     {
-        if (Canvas.transform.Find("Toggle-Diabetes-Y").GetComponent<Toggle>().isOn)
+        if (Canvas.transform.Find("Toggle-Bleeding-Y").GetComponent<Toggle>().isOn)
         {
-            Debug.Log("selecting daibetes - Y");
-            StartCoroutine(FilterSelect("Has Diabetes", "Y"));
+            Debug.Log("selecting Bleeding - Y");
+            StartCoroutine(FilterSelect("Bleeding", "Y"));
         }
     }
-    public void selectDiabetesN()
+    public void selectBleedingN()
     {
-        if (Canvas.transform.Find("Toggle-Diabetes-N").GetComponent<Toggle>().isOn)
+        if (Canvas.transform.Find("Toggle-Bleeding-N").GetComponent<Toggle>().isOn)
         {
-            Debug.Log("selecting daibetes - N");
-            StartCoroutine(FilterSelect("Has Diabetes", "N"));
+            Debug.Log("selecting Bleeding - N");
+            StartCoroutine(FilterSelect("Bleeding", "N"));
         }
     }
     public void selectBMIVoice()
@@ -319,16 +496,16 @@ public class SenseConnector : MonoBehaviour {
     {
         if (Canvas.transform.Find("Toggle-BMI-Y").GetComponent<Toggle>().isOn)
         {
-            Debug.Log("selecting BMI - Y");
-            StartCoroutine(FilterSelect("BMI Over 25", "Y"));
+            Debug.Log("selecting Overweight - Y");
+            StartCoroutine(FilterSelect("Overweight", "Y"));
         }
     }
     public void selectBMIN()
     {
         if (Canvas.transform.Find("Toggle-BMI-N").GetComponent<Toggle>().isOn)
         {
-            Debug.Log("selecting BMI - N");
-            StartCoroutine(FilterSelect("BMI Over 25", "N"));
+            Debug.Log("selecting Overweight - N");
+            StartCoroutine(FilterSelect("Overweight", "N"));
         }
     }
     public void selectMaleVoice()
@@ -343,7 +520,7 @@ public class SenseConnector : MonoBehaviour {
         if (Canvas.transform.Find("Toggle-Male").GetComponent<Toggle>().isOn)
         {
             Debug.Log("selecting Males");
-            StartCoroutine(FilterSelect("Customer Gender", "Male"));
+            StartCoroutine(FilterSelect("Gender", "Male"));
         }
     }
     public void selectFemaleVoice()
@@ -358,9 +535,21 @@ public class SenseConnector : MonoBehaviour {
         if(Canvas.transform.Find("Toggle-Female").GetComponent<Toggle>().isOn)
         { 
             Debug.Log("selecting Females");
-            StartCoroutine(FilterSelect("Customer Gender", "Female"));
+            StartCoroutine(FilterSelect("Gender", "Female"));
         }
     }
+
+    public void selectBar(string cat, string val)
+    {
+        Debug.Log("selecting " + val + " from " + cat + " BarChart");
+        StartCoroutine(FilterSelect(cat, val));
+    }
+    public void selectPie(string cat, string val)
+    {
+        Debug.Log("selecting " + val + " from " + cat + " PieChart");
+        StartCoroutine(FilterSelect(cat, val));
+    }
+
 
     IEnumerator FilterSelect(string field, string val)
     {

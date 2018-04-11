@@ -1,47 +1,49 @@
-﻿using HoloToolkit.Unity;
-using UnityEngine;
+﻿using UnityEngine;
 
-/// <summary>
-/// SelectedObjectMessageSender class sends a Unity message to currently selected object.
-/// Object selection is controlled via OnSelectObject and OnClearSelection events.
-/// Object selection and messages are triggered using voice commands, so keyword responses
-/// need to be registered in KeywordManager.
-/// </summary>
-public class SelectedObjectMessageSender : MonoBehaviour
+namespace HoloToolkit.Unity.InputModule.Tests
 {
     /// <summary>
-    /// Currently selected object.
+    /// SelectedObjectMessageSender class sends a Unity message to currently selected object.
+    /// Object selection is controlled via OnSelectObject and OnClearSelection events.
+    /// Object selection and messages are triggered using voice commands, so keyword responses
+    /// need to be registered in KeywordManager.
     /// </summary>
-    private GameObject selectedObject;
-
-    /// <summary>
-    /// Sets selection to currently focused object.
-    /// </summary>
-    public void OnSelectObject()
+    public class SelectedObjectMessageSender : MonoBehaviour
     {
-        OnClearSelection();
-        selectedObject = GazeManager.Instance.FocusedObject;
-        SendMessageToSelectedObject("OnSelectObject");
-    }
+        /// <summary>
+        /// Currently selected object.
+        /// </summary>
+        private GameObject selectedObject;
 
-    /// <summary>
-    /// Clears currently selected object.
-    /// </summary>
-    public void OnClearSelection()
-    {
-        SendMessageToSelectedObject("OnClearSelection");
-        selectedObject = null;
-    }
-
-    /// <summary>
-    /// Sends message to currently selected object.
-    /// </summary>
-    /// <param name="message">Message to send</param>
-    public void SendMessageToSelectedObject(string message)
-    {
-        if (selectedObject != null)
+        /// <summary>
+        /// Sets selection to currently focused object.
+        /// </summary>
+        public void OnSelectObject()
         {
-            selectedObject.SendMessage(message, SendMessageOptions.DontRequireReceiver);
+            OnClearSelection();
+            selectedObject = GazeManager.Instance.HitObject;
+            SendMessageToSelectedObject("OnSelectObject");
+        }
+
+        /// <summary>
+        /// Clears currently selected object.
+        /// </summary>
+        public void OnClearSelection()
+        {
+            SendMessageToSelectedObject("OnClearSelection");
+            selectedObject = null;
+        }
+
+        /// <summary>
+        /// Sends message to currently selected object.
+        /// </summary>
+        /// <param name="message">Message to send</param>
+        public void SendMessageToSelectedObject(string message)
+        {
+            if (selectedObject != null)
+            {
+                selectedObject.SendMessage(message, SendMessageOptions.DontRequireReceiver);
+            }
         }
     }
 }

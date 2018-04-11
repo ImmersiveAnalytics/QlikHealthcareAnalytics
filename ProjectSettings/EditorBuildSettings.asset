@@ -13,7 +13,7 @@ EditorBuildSettings:
     path: Assets/HoloToolkit-Examples/GazeRuler/Scenes/main.unity
   - enabled: 0
     path: Assets/HoloToolkit/Utilities/Tests/TextToSpeechManager.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SankeyOfficeScene.unity
   - enabled: 0
     path: Assets/Scenes/Vuforia-2-Hololens.unity
@@ -21,3 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Vuforia-1-Loading.unity
   - enabled: 0
     path: Assets/Scenes/Vuforia-0-Splash.unity
+  - enabled: 0
+    path: Assets/Scenes/Qonnections2.unity
+  - enabled: 0
+    path: Assets/Scenes/Qonnections3.unity
+  - enabled: 1
+    path: Assets/Scenes/Qonnections4.unity

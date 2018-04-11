@@ -1,31 +1,39 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-/// <summary>
-/// FocusedObjectMessageReceiver class shows how to handle messages sent by FocusedObjectMessageSender.
-/// This particular implementatoin controls object appearance by changing its color when focused.
-/// </summary>
-public class FocusedObjectMessageReceiver : MonoBehaviour
+namespace HoloToolkit.Unity.InputModule.Tests
 {
-    [Tooltip("Object color changes to this when focused.")]
-    public Color FocusedColor = Color.red;
-
-    private Material material;
-    private Color originalColor;
-
-    private void Start()
+    /// <summary>
+    /// FocusedObjectMessageReceiver class shows how to handle focus events.
+    /// This particular implementatoin controls object appearance by changing its color when focused.
+    /// </summary>
+    [RequireComponent(typeof(Renderer))]
+    public class FocusedObjectColorChanger : MonoBehaviour, IFocusable
     {
-        material = GetComponent<Renderer>().material;
-        originalColor = material.color;
-    }
+        [Tooltip("Object color changes to this when focused.")]
+        public Color FocusedColor = Color.red;
 
-    public void OnGazeEnter()
-    {
-        material.color = FocusedColor;
-    }
+        private Color originalColor;
+        private Material cachedMaterial;
 
-    public void OnGazeLeave()
-    {
-        material.color = originalColor;
+        private void Awake()
+        {
+            cachedMaterial = GetComponent<Renderer>().material;
+            originalColor = cachedMaterial.GetColor("_Color");
+        }
+
+        public void OnFocusEnter()
+        {
+            cachedMaterial.SetColor("_Color", FocusedColor);
+        }
+
+        public void OnFocusExit()
+        {
+            cachedMaterial.SetColor("_Color", originalColor);
+        }
+
+        private void OnDestroy()
+        {
+            DestroyImmediate(cachedMaterial);
+        }
     }
 }
